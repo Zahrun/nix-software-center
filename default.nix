@@ -1,5 +1,6 @@
 { pkgs ? import <nixpkgs> { }
 , lib ? import <nixpkgs/lib>
+, rustPkgs ? import <nixpkgs/rustPlatform/rust>
 }:
 let
   nixos-appstream-data = (import
@@ -35,8 +36,8 @@ pkgs.stdenv.mkDerivation rec {
     wrapGAppsHook4
   ] ++ (with pkgs.rustPlatform; [
     cargoSetupHook
-    rustPackages_1_66.cargo
-    rustPackages_1_66.rustc
+    rustPkgs.cargo
+    rustPkgs.rustc
   ]);
 
   buildInputs = with pkgs; [
