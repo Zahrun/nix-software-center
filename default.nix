@@ -17,6 +17,9 @@ pkgs.stdenv.mkDerivation rec {
 
   src = [ ./. ];
 
+  # fixes https://github.com/vlinkz/nix-software-center/issues/42
+  KEEP_APPSTREAM_DATA = "${nixos-appstream-data}";
+
   cargoDeps = pkgs.rustPlatform.importCargoLock {
     lockFile = ./Cargo.lock;
     outputHashes = {
